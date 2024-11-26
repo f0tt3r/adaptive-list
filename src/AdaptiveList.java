@@ -24,17 +24,18 @@ public class AdaptiveList {
         this.next = next;
     }
 
-    public static AdaptiveList singletonList(int value) {
-        return new AdaptiveList(value, null);
+    public void prepend(int value) {
+        AdaptiveList newHead = new AdaptiveList(this.value, this.next);
+        this.value = value;
+        this.next = newHead;
     }
 
     public boolean isLast() {
         return this.next == null;
     }
 
-    public AdaptiveList prepend(int value) {
-        AdaptiveList newHead = new AdaptiveList(value, this);
-        return newHead;
+    public static AdaptiveList singletonList(int value) {
+        return new AdaptiveList(value, null);
     }
 
     public AdaptiveList append(int value) {
