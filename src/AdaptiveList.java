@@ -70,4 +70,25 @@ public class AdaptiveList {
             return this.next.containsAdaptive(value);
         }
     }
+
+    public boolean containsTopPriority(int value) {
+        if (this.value == value) {
+            return true;
+        } else if (this.next != null && this.next.value == value) {
+            AdaptiveList foundNode = this.next;
+            this.next = foundNode.next;
+            foundNode.next = this;
+            return true;
+        } else if (this.next != null) {
+            boolean found = this.next.containsTopPriority(value);
+            if (found) {
+                AdaptiveList foundNode = this.next;
+                this.next = foundNode.next;
+                foundNode.next = this;
+            }
+            return found;
+        } else {
+            return false;
+        }
+    }
 }
